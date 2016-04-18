@@ -17,6 +17,4 @@ for component in [
 ]
   Components[component] = cfxify RN[component]
 
-module.exports = {
-  Components
-}
+module.exports = Components
