@@ -8,5 +8,5 @@ ReactRedux = require('cfx.react-redux');
 exports.Provider = cfxify(ReactRedux.Provider);
 
 exports.connect = function() {
-  return cfxify(ReactRedux.connect(arguments));
+  return cfxify(ReactRedux.connect.apply(this, arguments));
 };
