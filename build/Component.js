@@ -12,7 +12,7 @@ Component = require('react').Component;
 module.exports = {
   reg: AppRegistry.registerComponent,
   "new": function(component) {
-    var componentObj, newComponent;
+    var callWithState, componentObj, newComponent;
     componentObj = {};
     if (typeof component === 'function') {
       componentObj.render = component;
@@ -24,6 +24,13 @@ module.exports = {
     } else {
       return;
     }
+    callWithState = function(Func) {
+      if (!this.props.state) {
+        return Func.call(this, this.props);
+      } else {
+        return Func.call(this, this.props, this.props.state);
+      }
+    };
     return newComponent = (function(superClass) {
       var k, v, waitToBinds;
 
@@ -38,7 +45,7 @@ module.exports = {
         }
         if (typeof v === 'function') {
           newComponent.prototype[k] = function() {
-            return componentObj._pressButton.call(this, this.props, this.state);
+            return callWithState.call(this, componentObj._pressButton);
           };
           waitToBinds.push(k);
         } else {
@@ -50,7 +57,7 @@ module.exports = {
         var funcName, i, len;
         newComponent.__super__.constructor.call(this, props);
         if (componentObj.constructor) {
-          componentObj.constructor.call(this, this.props, this.state);
+          callWithState.call(this, componentObj.constructor);
         }
         for (i = 0, len = waitToBinds.length; i < len; i++) {
           funcName = waitToBinds[i];
@@ -60,7 +67,7 @@ module.exports = {
       }
 
       newComponent.prototype.render = function() {
-        return componentObj.render.call(this, this.props, this.state);
+        return callWithState.call(this, componentObj.render);
       };
 
       return newComponent;

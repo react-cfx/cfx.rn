@@ -24,6 +24,11 @@ module.exports =
     # TODO use throw error with error message
     else return
 
+    callWithState = (Func) ->
+      unless @props.state
+      then Func.call @, @props
+      else Func.call @, @props, @props.state
+
     class newComponent extends Component
 
       waitToBinds = []
@@ -38,20 +43,27 @@ module.exports =
 
         if typeof v is 'function'
           @::[k] = ->
-            componentObj._pressButton
-            .call @, @props, @state
+            callWithState.call @
+            , componentObj._pressButton
           waitToBinds.push k
         else
           @::[k] = v
 
+
+
       constructor: (props) ->
         super props
+
         if componentObj.constructor
-          componentObj.constructor
-          .call @, @props, @state
+
+          callWithState.call @
+          , componentObj.constructor
+
         for funcName in waitToBinds
           @[funcName] = componentObj[funcName].bind @
+
         @
 
       render: ->
-        componentObj.render.call @, @props, @state
+        callWithState.call @
+        , componentObj.render
