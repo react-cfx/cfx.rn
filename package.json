@@ -26,6 +26,9 @@
     "shelljs": "^0.6.0"
   },
   "dependencies": {
+    "cfx.react-redux": "../cfx.react-redux"
+  },
+  "dependencies": {
     "coffee-script": "^1.10.0",
     "react": "^0.14.8",
     "react-native": "^0.23.1",
