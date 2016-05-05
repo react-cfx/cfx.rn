@@ -78,24 +78,20 @@ module.exports = {
       };
 
       bindProps = function(props) {
-        (keys(props)).forEach((function(current, index, array) {
+        return (keys(props)).forEach((function(current, index, array) {
           var value;
           value = props[current];
-          if (typeof value === 'function') {
-            return this[current] = (function() {
-              var args;
-              args = Array.prototype.slice.call(arguments);
-              if (this.props) {
-                args.push(this.props);
-                if (this.props.state) {
-                  args.push(this.props.state);
-                }
+          return this[current] = typeof value === 'function' ? (function() {
+            var args;
+            args = Array.prototype.slice.call(arguments);
+            if (this.props) {
+              args.push(this.props);
+              if (this.props.state) {
+                args.push(this.props.state);
               }
-              return value.apply(this, args);
-            }).bind(this);
-          } else {
-            return this[current] = value;
-          }
+            }
+            return value.apply(this, args);
+          }).bind(this) : value;
         }).bind(this));
       };
 

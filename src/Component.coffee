@@ -113,18 +113,17 @@ module.exports =
             array
           ) ->
             value = props[current]
-            if typeof value is 'function'
-              @[current] = ( ->
+            @[current] =
+              if typeof value is 'function'
+              then ( ->
                 args = Array.prototype.slice.call arguments
                 if @props
                   args.push @props
                   args.push @props.state if @props.state
                 value.apply @, args
               ).bind @
-            else @[current] = value
+              else value
         ).bind @
-
-        return
 
       constructor: (props) ->
         super props
