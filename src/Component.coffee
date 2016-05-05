@@ -1,5 +1,8 @@
 echo = -> console.log arguments
-{ assign } = Object
+{
+  assign
+  keys
+} = Object
 {
   AppRegistry
 } = RN = require 'react-native'
@@ -101,26 +104,27 @@ module.exports =
         then Func.call @, @props
         else Func.call @, @props, @props.state
 
-        # args = [] unless args or (typeof args is 'object')
-        # if args.length is 0
-        #   unless @props.state
-        #   then Func.call @, @props
-        #   else Func.call @, @props, @props.state
-        # else
-        #   unless @props.state
-        #   then args.push @props
-        #   else args.concat [
-        #     @props
-        #     @props.state
-        #   ]
-        #   Func.call @, args
-
       bindProps = (props) ->
-        for k, v of props
-          @[k] =
-            if typeof v is 'function'
-            then v.bind @
-            else v
+
+        (keys props).forEach (
+          (
+            current
+            index
+            array
+          ) ->
+            value = props[current]
+            if typeof value is 'function'
+              @[current] = ( ->
+                args = Array.prototype.slice.call arguments
+                if @props
+                  args.push @props
+                  args.push @props.state if @props.state
+                value.apply @, args
+              ).bind @
+            else @[current] = value
+        ).bind @
+
+        return
 
       constructor: (props) ->
         super props
