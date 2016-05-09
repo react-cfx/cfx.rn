@@ -22,7 +22,7 @@ Exports = {
   connect: connect
 };
 
-ref2 = ['Platform', 'PropTypes'];
+ref2 = ['Platform'];
 for (i = 0, len = ref2.length; i < len; i++) {
   item = ref2[i];
   Exports[item] = RN[item];

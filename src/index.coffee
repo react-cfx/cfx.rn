@@ -27,7 +27,6 @@ Exports = {
 
 for item in [
   'Platform'
-  'PropTypes'
 ]
   Exports[item] = RN[item]
 

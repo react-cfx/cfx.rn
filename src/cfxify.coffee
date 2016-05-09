@@ -1,7 +1,7 @@
 {
-  createFactory
   StyleSheet
 } = RN = require 'react-native'
+{ createFactory } = require 'react'
 
 Component = require './Component'
 

@@ -23,15 +23,12 @@
   "homepage": "https://github.com/react-cfx/cfx.rn#readme",
   "devDependencies": {
     "ddeyes": "^0.0.1",
-    "shelljs": "^0.6.0"
+    "shelljs": "^0.7.0"
   },
   "dependencies": {
-    "cfx.react-redux": "../cfx.react-redux"
-  },
-  "dependencies": {
+    "cfx.react-redux": "git+https://github.com/react-cfx/cfx.react-redux.git",
     "coffee-script": "^1.10.0",
     "react": "^0.14.8",
-    "react-native": "^0.23.1",
-    "cfx.react-redux": "git+https://github.com/react-cfx/cfx.react-redux.git"
+    "react-native": "^0.25.1"
   }
 }
