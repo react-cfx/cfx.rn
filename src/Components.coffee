@@ -5,6 +5,7 @@ Components = {}
 
 for component in [
   'Text'
+  'TextInput'
   'View'
   'Image'
   'Navigator'
