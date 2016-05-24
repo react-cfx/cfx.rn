@@ -28,7 +28,7 @@
   "dependencies": {
     "cfx.react-redux": "git+https://github.com/react-cfx/cfx.react-redux.git",
     "coffee-script": "^1.10.0",
-    "react": "^0.14.8",
-    "react-native": "^0.25.1"
+    "react": "=15.0.2",
+    "react-native": "^0.26.1"
   }
 }
